@@ -1,6 +1,9 @@
 {
   "name": "moon-hooks",
-  "version": "1.0.0",
+  "version": "1.0.1",
+  "scripts": {
+    "publish": "nrm use npm & npm publish & nrm use taobao"
+  },
   "exports": {
     ".": "./index.ts"
   },
