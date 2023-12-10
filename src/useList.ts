@@ -4,12 +4,13 @@ import { useImmer } from "use-immer";
 export const useList = <T>(initialValue: T[]) => {
   const [list, setList] = useImmer(initialValue);
 
+  type DraftCondition = (item: Draft<T>) => boolean;
   type Condition = (item: T) => boolean;
 
   return {
     list,
     update(
-      condition: (item: Draft<T>) => boolean,
+      condition: DraftCondition,
       editor: (item: Draft<T>) => void
     ) {
       setList((list) => {
@@ -17,8 +18,8 @@ export const useList = <T>(initialValue: T[]) => {
         if (item) editor(item);
       });
     },
-    delete(condition: Condition) {
-      setList(list.filter((item) => !condition(item)));
+    delete(condition: DraftCondition) {
+      setList(list => list.filter((item) => !condition(item)));
     },
     findOne(condition: Condition) {
       return list.find(condition);
