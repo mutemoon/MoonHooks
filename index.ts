@@ -1,3 +1,4 @@
-import { useList, useListWithId } from "./src/useList";
+import { useList } from "./src/useList";
+import { useListWithId } from "./src/useListWithId";
 
 export { useList, useListWithId };
