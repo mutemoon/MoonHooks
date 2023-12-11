@@ -14,6 +14,6 @@ export declare const useListWithId: <T extends {
     delete(condition: (item: Draft<T>) => boolean): void;
     findOne(condition: (item: T) => boolean): T;
     findMany(condition: (item: T) => boolean): T[];
-    push(item: T): void;
+    push(item: Draft<T>): void;
     pop(): void;
 };
