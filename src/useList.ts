@@ -9,17 +9,14 @@ export const useList = <T>(initialValue: T[]) => {
 
   return {
     list,
-    update(
-      condition: DraftCondition,
-      editor: (item: Draft<T>) => void
-    ) {
+    update(condition: DraftCondition, editor: (item: Draft<T>) => void) {
       setList((list) => {
-        const item = list.find(condition);
-        if (item) editor(item);
+        const items = list.filter(condition);
+        items.forEach((item) => editor(item));
       });
     },
     delete(condition: DraftCondition) {
-      setList(list => list.filter((item) => !condition(item)));
+      setList((list) => list.filter((item) => !condition(item)));
     },
     findOne(condition: Condition) {
       return list.find(condition);
@@ -27,9 +24,9 @@ export const useList = <T>(initialValue: T[]) => {
     findMany(condition: Condition) {
       return list.filter(condition);
     },
-    push(item: T) {
+    push(item: Draft<T>) {
       setList((list) => {
-        list.push(item as Draft<T>);
+        list.push(item);
       });
     },
     pop() {
